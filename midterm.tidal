@@ -1,0 +1,90 @@
+d2 $ ccv "0 20 64 127" # ccn "0" # s "midi"
+
+-- level 2
+d1 $ fast 0.5 $ s "amina:2" # room 1
+-- danger
+d1 $ fast 0.5 $ s "amina:0" # room 1
+-- game over
+d1 $ fast 0.5 $ s "amina:1" # room 1
+-- score
+d1 $ fast 0.5 $ s "amina:3" # room 1
+-- welcome to the game
+d1 $ fast 0.5 $ s "amina:4" # room 1
+
+
+-- welcome to the game, distorted
+d1 $ every 2 ("<0.25 0.125 0.5>" <~) $ s "amina:4"
+  # squiz "<1 2.5 2>"
+  # room (slow 4 $ range 0 0.2 saw)
+  # gain 1.5
+  # sz 0.2
+  # orbit 2
+
+hush
+
+-- score
+d4 $ qtrigger 4 $ seqP [
+  (0, 1.5, ccv "0 0 [2 0] [2 3]" # ccn "0" # s "midi"),
+  (0, 1.5, n "0 0 [2 0] [2 3]" # s "amina:3")
+] # speed 1.2 # gain 3
+
+-- some sort of electronic noisy beginning
+-- i want to add "welcome to the game"
+d1 $ fast 0.5 $ s "superhoover" >| note (arp "updown" (scale "minor" ("<5,2,4,6>"+"[0 0 2 5]") + "f4")) # room 0.3 # gain 0.8 -- change to 0.8
+
+-- narration of a game without a game
+-- builds up slightly
+d3 $ stack [
+  s "sine" >| note (scale "major" ("[<4,6>,0,2](3,8)") + "g5") # room 0.4,
+  fast 2 $ s "hh*2 hh*2 hh*2 <hh*6 [hh*2]!3>" # room 0.4 # gain (range 1 1.2 rand)
+]
+
+-- building up before the drop
+d4 $ qtrigger 4 $ seqP [
+  (0, 1, s "arpy*8"),
+  (1, 2, s "arpy*16"),
+  (2, 3, s "arpy*32"),
+  (3, 4.5, fast 0.5 $ s "amina:2" # room 1 # speed 0.8 # gain 3)
+] # room 0.4
+
+-- part two beginning
+-- change in visuals
+d1 $ fast 2 $ s "supersaw" >| note (arp "updown" (scale "major" ("[5,2,4,6]"+"<0 0 2 5>") + "f3")) # room 0.3
+
+-- score
+d3 $ qtrigger 3 $ seqP [
+  (0, 1.5, n "0 0 [2 0] [2 3]" # s "amina:3")
+] # speed 1.2 # gain 3
+
+d3 $ stack [
+  s "sine" >| note (scale "major" ("[<4,6>,0,2](3,8)") + "f5") # room 0.4,
+  fast 2 $ s "hh*3 hh*2 hh*3 <hh*6 [hh*2]!3>" # room 0.4 # gain (range 1 1.2 rand)
+]
+
+d5 $ fast 0.5 $ s "amina:0" # gain 3
+
+-- ending theme
+-- more dangerous visuals
+d1 $ sound "bd*8" # pan (cat [square, sine])
+xfadeIn 1 8 $ s "arpy*8" # n (run 8)
+-- danger
+d2 $ note "c" # sound "<superpiano>" -- this with "danger!"
+d4 $ ccv "[1 2 3 4]" # ccn "0" # s "midi"
+d5 $ fast 0.5 $ s "amina:0" # speed 0.7 # gain 3
+
+-- "level 2" audio
+-- d1 $ fast 0.5 $ s "amina:4" # room 1
+
+-- the following keeps the color but changes the midi output
+d1 $ struct "<t(3,8) t(5,8,1)>" $ ccv "<[0 3 4 4 3] [0 0 4 4]>" # ccn "0" # s "midi"
+
+d3 silence
+d5 silence
+
+d1 $ qtrigger 1 $ seqP [
+  (0, 1, s "amina:1")
+] # room 1 # speed 0.8 # gain 3
+
+d3 silence
+
+hush
