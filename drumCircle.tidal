@@ -1,0 +1,93 @@
+d11 $ sometimesBy 0.2 (fast 2) $ degradeBy 0.4 $ s "pluck:2" <| n (run 8)
+
+d14 $ fast 2 $ s "tink" >| note (arp "updown" (scale "major" ("[3,1,4,6]"+"<0 0 2 5>") + "g3")) # room 0.3 
+
+d11 $ s "em2:4"
+d12 $ s "em2:3" # gain 0.7 # speed 0.5
+d4 $ s "realclaps ~ realclaps ~"
+d1 $ s "clubckick ~ ~ clubkick"
+d2 $ s "tok" <| note (run 8) # gain (range 1 1.5 rand)
+
+d13 $ sometimesBy 0.6 (fast 2) $ slow 2 $ sound "bev ~ bev ~" # legato (range 2 4 rand)
+
+d4 $ struct "t*2 <[t*2]*2 t*2>  t*2" $ s "bd" #note "d'maj7 c'maj"
+d1 $ s "sine(3,8)" |< note "c ~ d e ~ " 
+d1 silence
+d4 $ sometimes (slow 2) $ struct "t*2 [t*2]*2 t*2?" $ s "supervibe" #note "c f" #legato 2
+
+d6 $ s "[hh:1*2 ~ ~]?"
+d7  $ s "supergong" >| note ( scale "ritusen" ("c db f d5 f4") ) #room 0.4 #legato 1
+hush
+
+
+
+
+d9 $ whenmod 3 1 (# n (run 8)) $ s "tabla*8" <| n (run 4) 
+d9 silence
+d10 silence
+d10 $ s "~ bass:2 ~"
+d9 silence
+
+
+
+d3 $ s "808 808 ~ "
+d4 $ s "clak [clack clack]"
+
+
+d4 silence
+
+d1 silence
+d2 silence
+d3 silence
+d4 silence
+
+d13 $ sound "bev ~ bev ~" # legato 2
+
+
+
+d13 silence
+
+
+
+d13 $ stack [
+  s "tink" >| note (scale "major" ("[<4,3>,0,2](3,8)") + "g5") # room 0.1,
+  fast 2 $ s "hh*3 hh*2 hh*3 <hh*6 [hh*2]!3>" # room 0.1 # gain (range 1 1.2 rand)
+]
+
+d13 silence
+
+d14 silence
+
+
+d16 
+
+
+d4 $ s 
+
+
+
+
+
+
+d4 $ "pluck" >| 
+
+hush
+
+
+xfadeIn 
+
+
+section_1 = stack [s "tink" >| note ((scale "minor" "<[4@0.5 6@0.5 7@0.5 6@2.5] [4@0.5 6@0.5 7@0.5 6@2.5] [4@0.5 6@0.5 7@0.5 6@2 9@0.5] [[9 8] [8 7] [7 6] [6 7]]>" + "<0@2 1 0>")) # room 0.4, s "tink" <| n "<c5 f4 a4 g4>" # room 0.5] 
+section_2 = stack [s "superpiano" >| note ((scale "minor" "<[[4 6] [7 6] [7 6] [7 6]]>" + "<0@4 1@2>")) # room 0.4, s "superpiano" <| n "<{c5@4, g5@4} {a4@4, e5@4}>" # room 0.5]
+section_3 = stack [slow 2 $ s "superpiano" >| note ((scale "minor" "<[[7 6] [6 5] [5 4] [4 3] [3 2] [2 1] [1 0] [0 1]]>")) # room 0.4, s "superpiano" <| n "{g3@4, d4@4}" # room 0.5]
+
+do {
+  setcps 0.46875;
+  d1 $ qtrigger 1 $ seqPLoop [
+    (0, 8, section_1),
+    (8, 14, section_2),
+    (14, 16, section_3),
+    (16, 22, section_2),
+    (22, 24, section_3)
+  ]
+}
