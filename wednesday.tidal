@@ -1,0 +1,19 @@
+d1 $someCycles (fast 2) $ s "bd bd ~ bd?"
+
+d2 $ s "~ electro1" # gain 2
+
+d3 $ s "cp ~ ~ cp"
+
+d4 $ someCycles (degradeBy 0.2) $ s "pluck" <| n (run 8) 
+
+d5 $ ccv (segment 4 (range 0 127 saw)) # ccn 0 # s "midi"
+
+d6 $ slice 8 "[<0*8 0*2> 3*4 2 4] [4 .. 7]" $ sound "bev:1" # room 0.25 
+
+d6 $ s "909!4" 
+
+d6 $ s "<arpy superpiano>" <| up "c d e f g a b c6" <| "909!4" 
+
+d7 $ "clubkick clubkick [clubkick clubkick] clubkick"
+
+d8 $ slow 2 $ s "bass" <| n (run 4)
