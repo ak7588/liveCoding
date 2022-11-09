@@ -22,6 +22,9 @@ src(o1).voronoi(10,1,5).brightness(()=>Math.random()*0.15)
 
 
 
-src(o2).mask(shape(2).rotate(()=>cc[0])).modulateScrollY(noise(1)).colorama(()=>cc[0]).out(o1)
+src(o2).mask(shape(2)
+  .rotate(()=>cc[0]))
+  .modulateScrollY(noise(1))
+  .colorama(()=>cc[0]*0.15).out(o1)
 
 render(o1)
