@@ -1,0 +1,37 @@
+d1 $ s "bd bd"
+
+d2 $ "cp ~ ~ cp"
+
+d3 $ "~ ~ [clubkick clubkick clubkick] ~" # gain 0.8
+
+d4 $ "pluck" <| note (run 6) # 
+
+d5 $ "jazz(3,8) hh jazz(5,8) hh" <| note (run 6)
+
+d6 $ "sine" <| n (run 8) # 
+
+d6 $ silence
+
+d7 $ "tabla" <| n (run 12)
+
+hush
+
+d12 $ "<arpy tink bd bd ~ >(3,8)" # gain 1
+d10 $ fast 0.5 $ "sine(5,11)" <| "g b d a4 h1 hh" # gain 1
+d9 $ note "<[c1 a3 b2 ~] h*2>" # squiz "<1 2.5 2>" # gain 1
+d9 $ fast 2 $ s "house" <| n "1 2 3 2" # speed 0.25 # cut 1
+
+# squiz "<1 2.5 2>"
+  # room (slow 4 $ range 0 0.2 saw)
+  # gain 1.5 --1.5
+  # sz 0.2 --0.2
+  # orbit 2--2
+
+d15 $ rotR 1 $ ccv (segment 4 (range 127 0 saw)) # ccn 0 # s "midi"
+d15 $ rotL 3 $ ccv "0 32 [64 80 100] 127" # ccn 0 # s "midi"
+d15 $ struct "t t [t t t] t" $ ccv (segment 128 (range 0 127 saw)) # ccn "0" # s "midi"
+d15 $ slow 1 $ ccv "[64 127] ~ ~ ~" # ccn 0 # s "midi"
+
+
+d2 $ slow 2 $ stack [ s "supervibe" >| note "d'm7 g'7m c? [f c]" #room 0.5 #velocity 0.6,
+  struct "t t t? [t t]" $ ccv (segment 128 (range 100 20 isaw)) # ccn "0" # s "midi"]
