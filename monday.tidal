@@ -1,0 +1,24 @@
+d1 $ jux rev $ s "bd [808 808]"
+d2 $ jux rev $ s "clubkick [clubkick clubkick] clubkick clubkick"
+
+
+d3 $ s "trump" <| note (run 8)
+
+d4 $ "pluck" <| "a b e [d c d] e " # crush 14 # sustain 2
+
+
+d5 $ s "a b c5 f5 a1 b2 a" <| "[4 5 1 2 0 3 7 6]" # room 0.25
+
+d6 $ slow 2 $ "jazz(5,7)" <| n (run 8) -- vs incoming
+
+d5 silence
+
+hush
+
+d5  $ slice 8  $ whenmod 4 3 (const $ jux (# speed 0.5) $ sound "sitar" # room 0.5 # legato "4" ) $ sound "[fm:7]" # room 0.25
+
+
+d10 $ someCycles (slow 2) $ s "tabla2" <| n (run 12)
+
+d11 $ someCycles (slow 2) $ ccv (segment 12 (range 127 0 saw)) # ccn 0 # s "midi"
+d12 $ every 2 (# ccv "127 0 0 0") $ ccv "0" # ccn 1 # s "midi"
