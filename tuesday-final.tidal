@@ -1,0 +1,58 @@
+d2 $ stack [s "tink" # krush 2 # speed 0.5, struct "t(3,8)" $ ccv ((segment 128 (range 127 0 saw))) # ccn "0" # s "midi"] # gain 1
+
+    
+d3 $ s "supervibe" # note "<c d e>" # gain 0.7
+
+d1 $ s "em2" # note "<c d e>"
+
+d1 $ s "808:2*4"
+d2 $ s "ade"
+d3 $ s 
+
+d1 silence
+
+
+d5 $someCyclesBy 1 (fast 2) $ s "soskick" #note "<c d e>"
+
+
+
+d10 $ fast 2 $ "clubkick*8"
+
+
+hush
+
+do 
+	d2 silence
+    d3 silence
+    
+--- main sound (em2)---- 
+d1 $ stack [s "em2" # note "<c d e>", struct "t" $ ccv ((segment 128 (range 127 0 saw))) # ccn "0" # s "midi"]
+
+d4 $ stack [ s "tink(3,8)" # krush 2 # speed 0.5, struct "t(3,8)" $ ccv ((segment 128 (range 127 0 saw))) # ccn "0" # s "midi"] # gain 1
+
+d3 $ s "soskick(5,8)" # note "<c e f>" # gain 1
+
+d5 $ s "supervibe" #note "<c d e>"
+d5 silence
+
+d10 $ s "clubkick" # speed 2 # gain 0.9
+
+d11 $ slow 2 $ s "gtr"
+
+do 
+	d4 silence 
+    d5 silence
+    d3 $ someCyclesBy 0.8 (fast 2) $ s "soskick(5,8)" # note "<c e f>" # gain 1
+    d1 $ stack [s "em2*4" # note "<c d e>", struct "t*4" $ ccv ((segment 128 (range 127 0 saw))) # ccn "0" # s "midi"]
+    
+d1 $ "808:2*4"
+d2 $ "ade"
+d3  $ s "[soskick(5,8), supervibe]" #note "<c e f>" #gain "1"
+
+
+d5 $ s "supervibe" #note "<d d c e>"
+
+
+hush
+
+d3 silence
