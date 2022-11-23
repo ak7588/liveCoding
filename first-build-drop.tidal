@@ -1,0 +1,29 @@
+d1 $ stack [s "em2" # note "<c d e>", struct "t" $ ccv ((segment 128 (range 127 0 saw))) # ccn "0" # s "midi"]
+
+d2 $ stack [ s "tink(3,8)" # krush 2 # speed 0.5, struct "t(3,8)" $ ccv ((segment 128 (range 127 0 saw))) # ccn "0" # s "midi"] # gain 1
+
+d3 $ s "soskick(5,8)" # note "<c e f>" # gain 1
+
+d4 $ s "supervibe" #note "<c d e>"
+
+d5 $ s "clubkick" # speed 2 # gain 0.
+
+d7 $ s "clubkick [clubkick clubkick] clubkick*2 clubkick" # speed 2 # gain 0.9
+
+do 
+	d2 silence
+    d4 silence
+    d3 $ someCyclesBy 0.8 (fast 2) $ s "soskick(5,8)" # note "<c e f>" # gain 1
+    d1 $ stack [s "em2*4" # note "<c d e>", struct "t" $ ccv ((segment 128 (range 127 0 saw))) # ccn "0" # s "midi"]
+
+d7 $ fast 2 $ s "clubkick [clubkick clubkick] clubkick*2 clubkick" # speed "1 2 1.5" # gain 0.9
+
+
+    
+hush
+d2 silence
+    
+d1 $ "808:2*4"
+d2 $ "ade"
+d3  $ s "[soskick(5,8), supervibe]" #note "<c e f>" #gain "1"
+d5 $ fast 2 $ s "pluck*2 ~" #speed 5 
