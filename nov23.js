@@ -13,10 +13,11 @@ shape(()=>cc[0]*5+2).modulate(noise(2))
 
 
 //////wavey colours
-shape(2).modulateScrollY(noise(0.3,0.7))
+shape(2).modulateScrollY(noise(0.3,0.2))
   .color(Math.random(),Math.random(),Math.random())
   .scale(()=>cc[0]*1.5).diff(osc(3,0.5,7).thresh()
-  .modulate(noise(2)).mult(gradient(2))).diff(solid(1,1,1
+  .modulate(noise(2)).mult(solid(Math.random(),Math.random(),Math.random())))
+  .diff(solid(1,1,1
                      )).modulate(osc(10)).
   modulateScale(osc(1)).out()
 
@@ -40,3 +41,10 @@ shape(4,.6,.3).color(80,5,20).modulateRepeat(osc(10))
 osc(.7,1,0.9).blend(shape(()=>cc[0]*5,0.2,.5).mask(osc())
     .rotate(1,-1),0.4)
   .color(1,.3,.4).colorama(.4).posterize(2).diff(solid(1,1,1)).rotate(0.1,-.01).out()
+
+
+
+//blobby 
+
+shape(100).modulate(noise(2)).repeat(()=>cc[0]*2+2, ()=>cc[0]*2+2)
+  .colorama(()=>cc[0]*0.1).out()
