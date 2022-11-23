@@ -15,7 +15,7 @@ d1 $ stack [s "em2*4" # note "<c d e>", struct "t" $ ccv ((segment 128 (range 12
 d3 $ someCyclesBy 0.8 (fast 2) $ s "soskick(5,8)" # note "<c e f>" # gain 1
 
 d7 $ s "clubkick*3 [clubkick clubkick*2?] clubkick*2 clubkick" # speed "1 2 1.5" # gain 0.9
-d7 $ s "clubkick*8" # speed "1 2 1.5" # gain 0.9
+d7 $ s "clubkick*12" # speed "1 2 1.5" # gain 0.9
 
 dROOOOPP = do {
   d5 $ qtrigger 5 $ seqP [
@@ -23,11 +23,13 @@ dROOOOPP = do {
     (1, 8, s "[soskick, supervibe]" >| note "<d e f> c c c " #gain 1 # room 0.2),
     (1, 8, fast 2 $ s "pluck*2 ~" #speed 5 # room 0.3),
     (1, 8, s "super808*2 super808" #n "c" #gain 2 # room 0.2),
-    (1, 8, s "clubkick*8" # speed 2 # gain 1),
+    (0, 8, s "clubkick*8" # speed 2 # gain 1),
     (1, 8, s "supervibe" #note "<c d e>" # room 0.5)
   ]
 }
 
 do 
 	hush
+    --d3 $ s "soskick(5,8)" # note "<c e f>" # gain 1
     dROOOOPP
+   
