@@ -21,3 +21,31 @@ do
 	d1 silence
     d2 silence
     d7 $ s "feel(3,8) incoming(3,8)" # gain 1 # room 1 # krush 1
+
+
+----
+
+d2 $ bite 4 "1 0 1 <2 3>" $ s "sine*8" # note ((scale "pelog" "0 .. 7")+4) # room 0.4 #cut 2
+
+d2 $ fast 2 $  bite 4 "1 0 1 <2 3>" $ stack [s "sine*8" # note ((scale "pelog" "0 .. 7")+4) # room 0.4 #cut 2, struct "t*8" $ ccv ((segment 128 (range 127 0 isaw))) # ccn "0" # s "midi"]
+
+d1 $ scramble 8 $ s "tink" >| note ((scale "major" "<[2 2 3 4] [4 3 2 1] [0 0 1 2] [[2@3 1] 1]>")) # room 0.4
+
+d1 $ fast 2 $ scramble 8 $ s "tink" >| note ((scale "major" "<[2 2 3 4] [4 3 2 1] [0 0 1 2] [[2@3 1] 1]>")) # room 0.4
+
+d4 $ s "clubkick(3,8)" # gain 1
+
+d4 $ s "clubkick(3,8) clubkick(5,8)" # gain 1
+
+d5 $ qtrigger 5 $ seqP [
+  (0, 1, s "hh*4"),
+  (1, 2, s "hh*8"),
+  (2, 4, s "hh*16"),
+  (4, 5, s "808:2*4")
+  -- (4, 8, s "808:3(3,8) incoming(3,8)" # gain 1 # room 1 # krush 1)
+] # gain 2
+
+do
+	d1 silence
+    d2 silence
+    d7 $ s "feel(3,8) incoming(3,8)" # gain 1 # room 1 # krush 1
