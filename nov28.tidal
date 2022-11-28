@@ -1,0 +1,218 @@
+---- SECOND BUILD UP AND DROP
+
+d2 $ bite 4 "1 0 1 <2 3>" $ stack [s "sine*4" # note ((scale "pelog" "0 .. 7")+4) # room 0.4 #cut 2, struct "t*4" $ ccv ((segment 128 (range 17 0 isaw))) # ccn "0" # s "midi"]
+
+d1 $ scramble 8 $ s "tink" >| note ((scale "major" "<[2 2 3 4] [4 3 2 1] [0 0 1 2] [[2@3 1] 1]>")) # room 0.4
+
+d4 $ stack [ s "clubkick ~ ~ clubkick" # gain 1, struct "t ~ ~ t" $ ccv (segment 128 (range 127 0 saw)) # ccn "1" # s "midi"]
+
+do
+  d2 $ bite 4 "1 0 1 <2 3>" $ stack [s "sine*8" # note ((scale "pelog" "0 .. 7")+4) # room 0.4 #cut 2, struct "t*8" $ ccv ((segment 128 (range 127 0 isaw))) # ccn "0" # s "midi"]
+  d1 $ fast 2 $ scramble 8 $ s "tink" >| note ((scale "major" "<[2 2 3 4] [4 3 2 1] [0 0 1 2] [[2@3 1] 1]>")) # room 0.4
+
+do
+  d2 $ fast 2 $  bite 4 "1 0 1 <2 3>" $ stack [s "sine*8" # note ((scale "pelog" "0 .. 7")+4) # room 0.4 #cut 2, struct "t*8" $ ccv ((segment 128 (range 127 0 isaw))) # ccn "0" # s "midi"]
+  d4 $ stack [s "clubkick(3,8) clubkick(5,8)" # gain 1, struct "t(3,8) t(5,8)" $ ccv ((segment 128 (range 127 0 saw))) # ccn "6" # s "midi"]
+-- d4 $ stack [ s "clubkick(3,8)" # gain 1, struct "t(3,8)" $ ccv ((segment 128 (range 127 0 saw))) # ccn "1" # s "midi"]
+hush
+
+d5 $ qtrigger 5 $ seqP [
+  (0, 1, s "hh*4"),
+  (0, 1, ccv "0 1 0 1" # ccn "3" # s "midi"),
+  (1, 2, s "hh*8"),
+  (1, 2, ccv "0 1 0 1 0 1 0 1" # ccn "3" # s "midi"),
+  (2, 4, s "hh*16"),
+  (2, 4, ccv "0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1" # ccn "3" # s "midi"),
+  (4, 5, s "~ ~ clubkick clubkick"),
+  (5, 12, s "reverbkick*4" # room 0.3),
+  (5, 6, bite 4 "1 0 1 <2 3>" $ s "sine*4" # note ((scale "pelog" "0 .. 7")+4)),
+  (6, 12, bite 4 "1 0 1 <2 3>" $ s "sine*8" # note ((scale "pelog" "0 .. 7")+4)),
+  (5, 12, s "bass3" <| n (run 8) # room 0.5 # gain 1.5 # krush 2)
+] # gain 2
+
+do
+	d1 silence
+    d2 silence
+    d4 silence
+    d10 $ struct "t*8" $ ccv ((segment 128 (range 127 0 isaw))) # ccn "0" # s "midi"
+ 
+
+-----
+
+d1 $ silence
+
+
+hush
+
+d1 $ s "bass3" <| n (run 8) #room 0.5 #gain 1.5 #krush 2
+d1
+
+d5 $ qtrigger 5 $ seqP [
+  (0, 1, s "hh*4"),
+  (1, 2, s "hh*8"),
+  (2, 4, s "hh*16"),
+  (4, 5, s "808:2*4"),
+  (5, 6, struct "t(3,8)" $ s "pluck" # room 0.95 # speed "1" # gain 2  # up "6" # squiz 1.3),
+  (6, 8, struct "t [t t] t*2 t" $ s "808bd:1" # room 0.95 # speed "1" # gain 2  # up "6" # squiz 1.3)
+] # gain 2
+
+d4 $ s "<808bd:1(3,8) 808bd:1(5,8,1)>" # room 0.95 # speed "1 2" # gain 1.3 # squiz 1.3 # up "6"
+
+d1 $ s "supergong supergong ~" #n "c"
+d1 $ silence
+
+----
+d1 $ s "bd"
+
+-- CAN USE SOUNDSS!!!! ----
+d10 $ jux rev $ s "ade" <| n (run 10) # cut 1 # room 0.5
+d10 $ someCyclesBy 0.5 (fast 2)$ stack [s "<soskick superfm>" >| note (arp "updown" (scale "major" ("[7, 5, 3, 1]") + "<d5 g5 c5>")) #legato 1.2,  struct "[t*8]" $ ccv ((segment 128 (range 127 0 saw))) # ccn "0" # s "midi"]
+d10 $ jux rev $ slow 2 $ striateBy 32 (1/4) $ sound "em2:1" # room "0.9" # size "0.9" # up "-3" # slow 4 ( gain (range 0.8 1.3 rand) )
+
+hush
+
+------------ FIRST BUILD UP AND DROP ----------------------
+-- main sound (em2)---- 
+do
+	d1 $ stack [s "em2" # note "<c d e>", slow 4 $ struct "t*4" $ ccv ((segment 128 (range 127 0 saw))) # ccn "0" # s "midi"]
+	d2 $ stack [s "tink(3,8)" # krush 2 # speed 0.5 # gain 1.2, struct "t*4" $ ccv ((segment 128 (range 127 0 saw))) # ccn "4" # s "midi"]
+	d3 $ stack [s "soskick(5,8)" # note "<c e f>" # gain 1, struct "t(5,8)" $ ccv ((segment 128 (range 127 0 saw))) # ccn "1" # s "midi" ]
+	d4 $ stack [s "supervibe" #note "<c d e>", ccv (segment 128 (range 127 0 isaw)) #ccn "2" # s "midi"]
+	d5 $ stack [s "clubkick" # speed 2 # gain 0.9, ccv (segment 128(range 120 0 isaw)) #ccn "3" # s "midi"]
+	d5 $ stack [s "clubkick [clubkick*2] clubkick clubkick" # speed 2 # gain 0.9, struct "t [t t] t*2 t" $ ccv ((segment 128 (range 127 0 saw))) # ccn "3" # s "midi"]
+
+d1 $ stack [s "em2*4" # note "<c d e>", struct "t*4" $ ccv ((segment 128 (range 127 0 saw))) # ccn "0" # s "midi"]
+
+d3 $ someCyclesBy 0.8 (fast 2) $ stack [ s "soskick(5,8)" # note "<c e f>" # gain 1,  struct "t(5,8)" $ ccv ((segment 128 (range 127 0 saw))) # ccn "0" # s "midi"]
+
+-- sounds way better
+-- yesss agreed :)
+
+d5 $ fast 2 $ stack [s "clubkick [clubkick*2] clubkick clubkick" # speed 2 # gain 0.9, struct "t [t t] t*2 t" $ ccv ((segment 128 (range 127 0 saw))) # ccn "3" # s "midi"]
+
+--d5 $ stack [s "clubkick*3 clubkick clubkick clubkick" # speed "1 2 1.5" # gain 0.9, struct "t*3 [t t*2] t*2 t" $ ccv ((segment 128 (range 127 0 saw))) # ccn "3" # s "midi"] 
+
+--d5 $ fast 2 $stack [s "clubkick*4" # speed 2 # gain 0.9, struct "t [t t] t*2 t" $ ccv ((segment 128 (range 127 0 saw))) # ccn "3" # s "midi"]
+-- d5 $ stack [s "clubkick*12" # speed "1 2 1.5" # gain 0.9, struct "t*12" $ ccv ((segment 128 (range 127 0 saw))) # ccn "3" # s "midi"]
+
+
+dROOOOPP = do {
+  d5 $ qtrigger 5 $ seqP [
+    --(0, 8, s "808:2*4" # gain 2),
+    (0, 1, s "soskick(5,8)" # note "<c e f>" # gain 1.5),
+    (0, 1, struct "t(5,8)" $ ccv ((segment 128 (range 127 0 saw))) # ccn "1" # s "midi"),
+    (1, 8, s "[soskick, supervibe]" >| note "<d e f> c c c " #gain 1 # room 0.2),
+    (1, 8, fast 2 $ s "pluck*2 ~" #speed 5 # room 0.3),
+    (1, 8, s "super808*2 super808" #n "c" #gain 2 # room 0.2),
+    (1, 8, s "clubkick*8" # speed 2 # gain 1),
+    (1, 8, struct "t*2 ~ t" $ ccv ((segment 128 (range 127 0 saw))) # ccn "1" # s "midi"),
+    (1, 8, s "supervibe" #note "<c d e>" # room 0.5)
+    --(1, 8, s "~ em2*2" # legato 2)
+  ]
+}
+
+  
+do 
+	hush
+    --d3 =$ s "soskick(5,8)" # note "<c e f>" # gain 1
+    dROOOOPP
+    
+   
+
+
+d1 $ stack [ s "808:2*4?" # gain 1.3,  struct "t*4?" $ ccv ((segment 128 (range 127 0 saw))) # ccn "0" # s "midi"]
+-- d2 $ jux rev $ slow 2 $ striateBy 32 (1/4) $ sound "em2:1" # room "0.9" # size "0.9" # up "-3" # slow 4 ( gain (range 0.8 1.2 rand) )
+d3  $ s "[soskick, supervibe]" >| note "<d e f> c c c " #gain 1
+d5 $ fast 2 $ s "pluck*2 ~" #speed 5 
+d4 $ s "super808*2 super808" #n "c" #gain 2
+
+
+
+------------- SUNDAY'S CODE --------------------------------
+
+
+d1 $ s "bd"
+
+d10 $ jux rev $ s "ade" <| n (run 10) # cut 1 # room 0.5
+
+d2 $ silence
+d1 silence
+
+hush
+
+d10 $ someCyclesBy 0.5 (fast 2)$ stack [s "<soskick superfm>" >| note (arp "updown" (scale "major" ("[7, 5, 3, 1]") + "<d5 g5 c5>")) #legato 1.2,  struct "[t*8]" $ ccv ((segment 128 (range 127 0 saw))) # ccn "0" # s "midi"]
+
+d1 $ s "reverbkick*4?" # room 0.3
+d10 silence
+d1 $ someCycles (fast 2) $ jux rev $ slow 4 $ s "baa" <| n (run 7) # room 0.5
+d2 $ jux rev $ slow 4 $ s "birds" <| n (run 10)
+d3 $ s "tech(5,8)" <| n (run 2) # gain 2
+d4 silence
+
+
+d4 $ "rm(3,8)"
+d5 $ "sine*12?" # note (run 12) 
+
+d6 $ "blip" <| n(run 6)
+d3 $ slow 2 $ "v" <| n (run 12) # room 0.3
+
+hush
+d1 silence
+
+d4 $ qtrigger 4 $ seqP [
+  (0, 1, s "ade*8"),
+  (1, 2, s "ade*16"),
+  (2, 3, s "ade*32"),
+  (3, 4.5, fast 0.5 $ s "jazz(3,8)" # room 0.5 # speed 0.8 # gain 0.8)
+] # gain 2
+
+
+d1 $ every 2 (fast 4) $ jux rev $ slow 8 $ striateBy 64 (1/4) $ sound "jazz(3,8)" # room "0.9" # size "0.9" # up "-3" # slow 4 ( gain (range 0.5 1 rand) )
+
+
+d2 $ jux rev $ slow 2 $ striateBy 32 (1/4) $ sound "em2:1" # room "0.9" # size "0.9" # up "-3" # slow 4 ( gain (range 0.5 0.8 rand) ) --- good to use
+
+
+d3 $ jux rev $ slow 2 $ striateBy 32 (1/4) $ sound "sax" # room "0.9" # size "0.9" # up "-3" # slow 4 ( gain (range 0.5 0.8 rand) )
+
+d2 silence
+d3 silence
+
+d10 $ note (scale "major" ("g5")) # gain 1
+
+d3 $ stack [
+  slow 4 $ s "wind" >| note (scale "major" ("[<2,3>,0,2](3,8)") + "a5") # room 0.4,
+  fast 2 $ s "ade*2 ade*2 ade*2 <ade*6 [ade*2]!3>" # room 0.4 # gain (range 1 1.2 rand)
+]
+
+d8 silence
+
+d3 $ stack [s "battles(3,8)", struct "[t(3,8)]" $ ccv ((segment 128 (range 127 0 saw))) # ccn "0" # s "midi"] # gain 0.8
+
+d5 $ stack [s "tink" <| note (run 8), struct "[t*8]" $ ccv ((segment 128 (range 127 0 saw))) # ccn "1" # s "midi"]  #gain 1.3
+
+d6 $ s "pluck" <| n (run 4) + "c2" # gain 1
+d7 silence
+d7 $ slow 4 $ s "xmas" # room 0.5
+
+d8 $ slow 8 $ s "em2:2" <| note ("[b ~] [a ~] [g ~] [e ~]") # room 0.5 # krush 0.7
+
+
+hush
+d1 $ struct "[t*8]" $ ccv ((segment 128 (range 127 0 saw))) # ccn "0" # s "midi"
+
+
+
+
+
+--------Dania's thing start
+d1 $ someCyclesBy 1 (slow 2) $ stack[s "tink:4 tink:3 tink:2 <tink:3 [tink:5 ~?]>", struct "t t t <t [t ~?]>" $ ccv "0 128" # ccn "0" # s "midi"] #speed 0.25 #gain 1.5
+--some
+d3 $stack [s "tok:2(3,8)" #gain 1.3 #room 0.3 #legato 2, struct "t(3,8)" $ ccv (segment 128 (range 0 127 saw)) # ccn "2" # s "midi" ] --jux
+d2 $ s "bd*2" #room 0.2 #gain 0.8
+d4 $ stack[s "tabla:5(5,8)", struct "t(5,8)" $ ccv (segment 128 (range 0 127 isaw)) # ccn "2" # s "midi"] #room 0.2
+-----Dania's thing end
+
+hush
+
+
