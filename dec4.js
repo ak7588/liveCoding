@@ -1,4 +1,4 @@
-voronoi(10,1,4).color(()=>cc[0]*3+1).modulate(noise(()=>cc[0]*10,()=>cc[1])).out()
+oronoi(10,1,4).color(()=>cc[0]*3+1).modulate(noise(()=>cc[0]*10,()=>cc[1])).out()
 hush()
 
 render(o0)
@@ -364,6 +364,9 @@ src(s0).out()
 hush()
 
 src(o0).modulate(noise(()=>cc[2]*5)).mult(osc(10,0.01,1)).blend(o1, 0.6).blend(o1).out(o1)
+
+src(o0).modulate(noise(()=>time*5)).mult(osc(10,0.01,1)).blend(o1, 0.6).blend(o1).out(o1)
+
 render(o1)
 
 render()
@@ -388,11 +391,15 @@ osc(10,-0.25,0.7).posterize(1.5).brightness(0.5).luma(0.5).contrast(3)
 
 
 // NICE Visual
-voronoi(10).mult(osc(10,0.5,1)).rotate(()=>time).modulate(noise(10)).modulateKaleid(osc(11,0.5,0),10).luma(0.5).saturate(2).contrast(1.2).out()
-voronoi(10).mult(osc(10,0.5,1)).rotate(()=>time).modulate(noise(10)).modulateKaleid(osc(1,0.5,0),10).luma(0.5).saturate(2).contrast(1.2).out()
-voronoi(10).mult(osc(10,0.5,1)).rotate(()=>time).modulate(noise(10)).luma(0.5).saturate(2).contrast(1.2).out()
-render(o0)
+voronoi(10).mult(osc(10,0.5,1)).rotate(()=>time).modulate(noise(10)).modulateKaleid(osc(11,0.5,0),10).luma(0.5)
+  _.saturate(2).contrast(1.2).out()
 
+voronoi(10).mult(osc(10,0.5,1)).rotate(()=>time).modulate(noise(10)).modulateKaleid(osc(1,0.5,0),10).luma(0.5).saturate(2).contrast(1.2).out()
+
+voronoi(10).mult(osc(10,0.5,1)).rotate(()=>time).modulate(noise(10)).luma(0.5).saturate(2).contrast(1.2).out()
+render(o1)
+
+render()
 
 
 
